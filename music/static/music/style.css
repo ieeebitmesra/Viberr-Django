@@ -1,0 +1,19 @@
+body{
+    background :white url("images/white-linen-background.jpg");
+}
+
+.navbar{
+    border-radius: 0;
+}
+
+.navbar-brand{
+    font-family: 'Satisfy', cursive;
+}
+
+h2{
+    font-family: 'Satisfy', cursive;
+}
+
+.page-header{
+
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Register</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'music/animate.css' %}" />
+    <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="{% static 'music/wow.min.js' %}"></script>
+    <script>  new WOW().init(); </script>
+</head>
+
+<body>
+    <div  class = "page-header" style="margin-top: -1%; padding: 18%; background: linear-gradient(#0f0c29, #302b63, #24243e);">
+            <h1 class="wow pulse" style= "color: white; font-size: 800%; font-family: Satisfy; text-align: center;"> Viber </h1>
+            <h3 class="wow fadeInRight"style= "color: white; font-size: 200%; font-family: Satisfy; text-align: center;"> An Online Cloud for Songs..</h3>
+    </div>
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-sm-12 col-md-7">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h1 style= "font-family: 'Raleway', sans-serif; margin-bottom: 5%; ">Create a new account</h1>
+                        {% if error_message %}
+                        <p><strong> {{ error_message }} </strong></p>
+                        {% endif %}
+                        <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'music/form-template.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                            </div> 
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

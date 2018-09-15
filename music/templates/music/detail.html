@@ -1,0 +1,65 @@
+{% extends 'music/base.html'%}
+{% block title %}Album Details{% endblock %}
+
+{% block body %}
+
+    <div class="col-sm-3">
+        <img src="{{album.album_logo.url }}"  class="img-responsive" width="300" height ="300">
+
+        <h1 style="font-family: 'Raleway', sans-serif;">{{album.album_title}}</h1>
+        <h2>{{album.artist}}</h2>
+
+
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+
+    </div>
+    <div class="col-sm-8 container" style="background-color:white; font-family: 'Alegreya', serif; ">
+            <div class="row">
+                    <h4 class="col-xs-5">Song</h4>
+                    <h4 class="col-xs-2">Play</h4>  
+                    <h4 class="col-xs-3">Download</h4>
+                    <h4 class="col-xs-2">Delete</h4>
+            </div>
+           
+            
+            {% for song in album.song_set.all %}
+            <div class="row" style="margin:1% 0%">    
+                <div class="col-xs-5" style ="font-size: 150%;">{{ song.song_title }}</div>
+                <div class="col-xs-2">
+                    <a href="{% url 'music:play' song.id %}">
+                        <button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-play"></span> Play
+                        </button>
+                     </a>
+                </div>
+                <div class="col-xs-3">
+                    <a href="{% url 'music:download' song.id %}">
+                        <button type="button" class="btn btn-success btn-sm">
+                            <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                        </button>
+                    </a>
+                </div>
+                {% if song.album.user.get_username == user.username %}
+                <div class="col-xs-2">
+                    <form action="{% url 'music:song-delete' song.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="song_id" value="{{ song.id }}" />
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </form>
+                </div>
+                {% endif %}
+            </div>
+                {% endfor %}
+            
+
+    </div>
+    <div class="col-sm-1">
+    </div>
+
+    
+
+{% endblock %}
